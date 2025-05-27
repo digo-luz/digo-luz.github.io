@@ -27,15 +27,34 @@
         }
 
         .reveal .slides section {
-            padding: 20px;
+            padding: 80px 40px; /* Increased padding top/bottom for more vertical space */
             text-align: center;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
+            height: 100vh; /* Ensure each slide takes full viewport height */
         }
 
-        .reveal h1, .reveal h2, .reveal h3, .reveal h4, .reveal h5, .reveal h6 {
+        .reveal h1 {
+            font-size: 5.5rem; /* Larger for FHD */
+            font-weight: 700;
+            color: var(--r-heading-color);
+            margin-bottom: 2rem;
+        }
+        .reveal h2 {
+            font-size: 4rem; /* Larger for FHD */
+            font-weight: 700;
+            color: var(--r-heading-color);
+            margin-bottom: 1.5rem;
+        }
+        .reveal h3 {
+            font-size: 2.8rem; /* Larger for FHD */
+            font-weight: 600;
+            color: var(--r-heading-color);
+            margin-bottom: 1rem;
+        }
+        .reveal h4, .reveal h5, .reveal h6 {
             color: var(--r-heading-color);
         }
 
@@ -48,72 +67,77 @@
         }
 
         .stat-number {
-            font-size: 3rem;
+            font-size: 6rem; /* Larger for FHD */
             font-weight: 700;
             color: #32CD32; /* LimeGreen */
         }
         .stat-label {
-            font-size: 1.125rem;
+            font-size: 2.2rem; /* Larger for FHD */
             color: #006400; /* DarkGreen */
         }
         .section-title {
-            font-size: 2.25rem;
+            font-size: 4rem; /* Larger for FHD */
             font-weight: 700;
             color: #006400; /* DarkGreen */
-            margin-bottom: 1rem;
+            margin-bottom: 2.5rem; /* Adjusted margin */
             text-align: center;
         }
         .card {
             background-color: white;
-            border-radius: 0.5rem;
-            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -1px rgba(0,0,0,0.06);
-            padding: 1.5rem;
-            margin-bottom: 1.5rem;
-            text-align: left; /* Adjust for card content */
+            border-radius: 1rem; /* More rounded */
+            box-shadow: 0 8px 15px -3px rgba(0,0,0,0.1), 0 4px 6px -2px rgba(0,0,0,0.05); /* Stronger shadow */
+            padding: 3rem; /* Increased padding */
+            margin-bottom: 2.5rem; /* Adjusted margin */
+            text-align: left;
+            width: 100%; /* Ensure cards take full width of their grid/flex container */
         }
         .icon-list-item {
             display: flex;
             align-items: center;
-            margin-bottom: 0.5rem;
-            font-size: 1.125rem;
+            margin-bottom: 1rem; /* Adjusted margin */
+            font-size: 1.6rem; /* Larger for FHD */
             color: #333333;
         }
         .icon-list-item span:first-child {
-            margin-right: 0.75rem;
+            margin-right: 1.2rem; /* Adjusted margin */
             color: #32CD32; /* LimeGreen */
-            font-size: 1.5rem;
+            font-size: 2.5rem; /* Larger icon */
         }
         .table-header {
             background-color: #90EE90; /* LightGreen */
             color: #006400; /* DarkGreen */
             font-weight: 600;
+            font-size: 1.4rem; /* Larger for FHD */
         }
         .table-cell {
-            padding: 0.75rem;
+            padding: 1.2rem; /* Increased padding */
             border: 1px solid #ADFF2F; /* GreenYellow */
+            font-size: 1.3rem; /* Larger for FHD */
         }
         .llm-output {
             background-color: #F0FFF0;
-            border-left: 4px solid #32CD32;
-            padding: 1rem;
-            margin-top: 1rem;
-            border-radius: 0.25rem;
+            border-left: 8px solid #32CD32; /* Thicker border */
+            padding: 2rem; /* Increased padding */
+            margin-top: 2rem; /* Adjusted margin */
+            border-radius: 0.75rem; /* More rounded */
             font-style: italic;
             color: #333333;
             white-space: pre-wrap;
             text-align: left;
+            font-size: 1.4rem; /* Larger for FHD */
         }
         .llm-button, .game-button {
             background-color: #006400; /* DarkGreen */
             color: white;
-            padding: 0.75rem 1.5rem;
-            border-radius: 0.5rem;
+            padding: 1.2rem 2.5rem; /* Increased padding */
+            border-radius: 1rem; /* More rounded */
             font-weight: 600;
             transition: background-color 0.3s ease;
             cursor: pointer;
-            margin-top: 1rem;
+            margin-top: 2rem; /* Adjusted margin */
             display: inline-block;
             border: none;
+            font-size: 1.8rem; /* Larger for FHD */
         }
         .llm-button:hover, .game-button:hover {
             background-color: #32CD32; /* LimeGreen */
@@ -126,31 +150,37 @@
         /* Gamification specific styles */
         .question-container {
             background-color: white;
-            border-radius: 0.5rem;
-            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -1px rgba(0,0,0,0.06);
-            padding: 2rem;
-            margin-top: 2rem;
-            max-width: 700px;
+            border-radius: 1rem; /* More rounded */
+            box-shadow: 0 8px 15px -3px rgba(0,0,0,0.1), 0 4px 6px -2px rgba(0,0,0,0.05); /* Stronger shadow */
+            padding: 4rem; /* Increased padding */
+            margin-top: 3rem; /* Adjusted margin */
+            max-width: 900px; /* Wider for FHD */
             width: 100%;
             text-align: center;
+        }
+        .question-container p {
+            font-size: 3rem; /* Larger for FHD */
+            font-weight: 600;
+            margin-bottom: 2rem;
         }
         .question-options button {
             background-color: #90EE90; /* LightGreen */
             color: #006400; /* DarkGreen */
-            padding: 0.75rem 1.5rem;
-            border-radius: 0.5rem;
+            padding: 1.2rem 3rem; /* Increased padding */
+            border-radius: 1rem; /* More rounded */
             font-weight: 600;
-            margin: 0.5rem;
+            margin: 1rem; /* Adjusted margin */
             cursor: pointer;
             transition: background-color 0.3s ease;
             border: none;
+            font-size: 1.6rem; /* Larger for FHD */
         }
         .question-options button:hover {
             background-color: #ADFF2F; /* GreenYellow */
         }
         .feedback-message {
-            margin-top: 1rem;
-            font-size: 1.25rem;
+            margin-top: 2rem; /* Adjusted margin */
+            font-size: 2.2rem; /* Larger for FHD */
             font-weight: 600;
         }
         .feedback-correct {
@@ -161,26 +191,90 @@
         }
         .score-display {
             position: absolute;
-            top: 20px;
-            right: 20px;
+            top: 40px; /* Adjusted position */
+            right: 40px; /* Adjusted position */
             background-color: #006400;
             color: white;
-            padding: 0.5rem 1rem;
-            border-radius: 0.5rem;
+            padding: 1rem 1.5rem; /* Adjusted padding */
+            border-radius: 1rem; /* More rounded */
             font-weight: 600;
             z-index: 100;
+            font-size: 1.8rem; /* Larger for FHD */
         }
         .chart-container {
             position: relative;
             width: 100%;
-            max-width: 600px;
-            height: 300px;
+            max-width: 900px; /* Increased for FHD */
+            height: 500px; /* Adjusted height for FHD */
             margin-left: auto;
             margin-right: auto;
         }
-        @media (min-width: 768px) {
+        @media (min-width: 768px) { /* md breakpoint */
             .chart-container {
-                height: 350px;
+                height: 550px; /* Further adjusted for larger screens */
+            }
+        }
+        .reveal p {
+            font-size: 1.6rem; /* Larger for general text */
+            line-height: 1.5; /* Improved line spacing */
+        }
+        .reveal ul {
+            font-size: 1.5rem; /* Larger for lists */
+        }
+        .reveal .text-white.text-2xl {
+            font-size: 2.2rem; /* Adjusted for header subtitle */
+        }
+        .reveal .text-white.text-xl {
+            font-size: 1.8rem; /* Adjusted for footer text */
+        }
+
+        /* Specific layout adjustments for horizontal flow */
+        .grid-container-fhd {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Flexible columns */
+            gap: 40px; /* Increased gap for better separation */
+            width: 100%;
+            max-width: 1600px; /* Allow more horizontal spread */
+            margin: 0 auto; /* Center the grid */
+        }
+
+        .flex-container-fhd {
+            display: flex;
+            flex-wrap: wrap; /* Allow wrapping on smaller screens */
+            justify-content: center;
+            align-items: center;
+            gap: 40px; /* Increased gap */
+            width: 100%;
+            max-width: 1600px; /* Allow more horizontal spread */
+            margin: 0 auto; /* Center the flex container */
+        }
+
+        /* Override specific card widths within these new containers if needed */
+        .grid-container-fhd .card,
+        .flex-container-fhd .card {
+            width: auto; /* Let grid/flex manage width */
+            flex-grow: 1; /* Allow flex items to grow */
+        }
+
+        /* Adjustments for question-container and card side-by-side if desired, but generally stacked is better */
+        .question-and-card-layout {
+            display: flex;
+            flex-direction: column; /* Default to column */
+            align-items: center;
+            gap: 40px;
+            width: 100%;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        @media (min-width: 1024px) { /* lg breakpoint */
+            .question-and-card-layout {
+                flex-direction: row; /* Change to row on large screens */
+                justify-content: space-around;
+            }
+            .question-and-card-layout .question-container,
+            .question-and-card-layout .card {
+                flex: 1; /* Distribute space evenly */
+                max-width: 48%; /* Adjust max-width for side-by-side */
             }
         }
     </style>
@@ -216,19 +310,21 @@
             <section data-background-color="#F0FFF0">
                 <h2 class="section-title">Nível 2: A Escalada dos Preços</h2>
                 <p class="text-lg text-slate-700 mb-6">O Docker Inc. tem sido agressivo com seus reajustes. Quanto aumentou nos últimos 3 anos?</p>
-                <div class="question-container">
-                    <p class="text-2xl font-semibold mb-4">Em quantos por cento os preços do Docker Desktop aumentaram nos últimos 3 anos?</p>
-                    <div class="question-options flex flex-wrap justify-center">
-                        <button onclick="checkAnswer(this, 'incorrect', '100%')">100%</button>
-                        <button onclick="checkAnswer(this, 'correct', '300%')">300%</button>
-                        <button onclick="checkAnswer(this, 'incorrect', '50%')">50%</button>
+                <div class="question-and-card-layout">
+                    <div class="question-container">
+                        <p class="text-2xl font-semibold mb-4">Em quantos por cento os preços do Docker Desktop aumentaram nos últimos 3 anos?</p>
+                        <div class="question-options flex flex-wrap justify-center">
+                            <button onclick="checkAnswer(this, 'incorrect', '100%')">100%</button>
+                            <button onclick="checkAnswer(this, 'correct', '300%')">300%</button>
+                            <button onclick="checkAnswer(this, 'incorrect', '50%')">50%</button>
+                        </div>
+                        <div id="feedback2" class="feedback-message"></div>
                     </div>
-                    <div id="feedback2" class="feedback-message"></div>
-                </div>
-                <div class="card mt-8 w-full max-w-xl">
-                    <h3 class="text-xl font-semibold text-[#006400] mb-3 text-center">Aumento Agressivo de Preços</h3>
-                    <div class="chart-container h-64 md:h-72">
-                        <canvas id="priceTrendChart"></canvas>
+                    <div class="card w-full max-w-xl">
+                        <h3 class="text-xl font-semibold text-[#006400] mb-3 text-center">Aumento Agressivo de Preços</h3>
+                        <div class="chart-container h-64 md:h-72">
+                            <canvas id="priceTrendChart"></canvas>
+                        </div>
                     </div>
                 </div>
             </section>
@@ -253,19 +349,21 @@
             <section data-background-color="#F0FFF0">
                 <h2 class="section-title">Nível 4: A Batalha da RAM</h2>
                 <p class="text-lg text-slate-700 mb-6">Um dos grandes trunfos do Portainer CE é sua eficiência. Qual a diferença no consumo de RAM?</p>
-                <div class="question-container">
-                    <p class="text-2xl font-semibold mb-4">O Portainer CE consome quantos por cento MENOS RAM que o Docker Desktop?</p>
-                    <div class="question-options flex flex-wrap justify-center">
-                        <button onclick="checkAnswer(this, 'incorrect', '20%')">20%</button>
-                        <button onclick="checkAnswer(this, 'incorrect', '40%')">40%</button>
-                        <button onclick="checkAnswer(this, 'correct', '60%')">60%</button>
+                <div class="question-and-card-layout">
+                    <div class="question-container">
+                        <p class="text-2xl font-semibold mb-4">O Portainer CE consome quantos por cento MENOS RAM que o Docker Desktop?</p>
+                        <div class="question-options flex flex-wrap justify-center">
+                            <button onclick="checkAnswer(this, 'incorrect', '20%')">20%</button>
+                            <button onclick="checkAnswer(this, 'incorrect', '40%')">40%</button>
+                            <button onclick="checkAnswer(this, 'correct', '60%')">60%</button>
+                        </div>
+                        <div id="feedback3" class="feedback-message"></div>
                     </div>
-                    <div id="feedback3" class="feedback-message"></div>
-                </div>
-                <div class="card mt-8 w-full max-w-xl">
-                    <h3 class="text-xl font-semibold text-[#006400] mb-3 text-center">Comparativo de Consumo de RAM</h3>
-                    <div class="chart-container h-56 md:h-64">
-                        <canvas id="ramUsageChart"></canvas>
+                    <div class="card mt-8 w-full max-w-xl">
+                        <h3 class="text-xl font-semibold text-[#006400] mb-3 text-center">Comparativo de Consumo de RAM</h3>
+                        <div class="chart-container h-56 md:h-64">
+                            <canvas id="ramUsageChart"></canvas>
+                        </div>
                     </div>
                 </div>
             </section>
@@ -273,64 +371,68 @@
             <section data-background-color="#F0FFF0">
                 <h2 class="section-title">Nível 5: Escudo de Riscos</h2>
                 <p class="text-lg text-slate-700 mb-6">O Portainer CE não só economiza, mas também nos protege. Como ele resolve o risco de "Aumento de preços unilateral"?</p>
-                <div class="question-container">
-                    <p class="text-2xl font-semibold mb-4">Como o Portainer CE mitiga o risco de "Aumento de preços unilateral"?</p>
-                    <div class="question-options flex flex-wrap justify-center">
-                        <button onclick="checkAnswer(this, 'incorrect', 'Oferecendo descontos')">Oferecendo descontos</button>
-                        <button onclick="checkAnswer(this, 'correct', 'Custo zero permanente')">Custo zero permanente</button>
-                        <button onclick="checkAnswer(this, 'incorrect', 'Negociando contratos')">Negociando contratos</button>
+                <div class="question-and-card-layout">
+                    <div class="question-container">
+                        <p class="text-2xl font-semibold mb-4">Como o Portainer CE mitiga o risco de "Aumento de preços unilateral"?</p>
+                        <div class="question-options flex flex-wrap justify-center">
+                            <button onclick="checkAnswer(this, 'incorrect', 'Oferecendo descontos')">Oferecendo descontos</button>
+                            <button onclick="checkAnswer(this, 'correct', 'Custo zero permanente')">Custo zero permanente</button>
+                            <button onclick="checkAnswer(this, 'incorrect', 'Negociando contratos')">Negociando contratos</button>
+                        </div>
+                        <div id="feedback4" class="feedback-message"></div>
                     </div>
-                    <div id="feedback4" class="feedback-message"></div>
-                </div>
-                <div class="card mt-8 w-full max-w-3xl overflow-x-auto">
-                    <table class="w-full min-w-[600px]">
-                        <thead>
-                            <tr class="table-header">
-                                <th class="table-cell text-left">Risco Atual (Docker Desktop)</th>
-                                <th class="table-cell text-left">Como o Portainer CE Resolve</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td class="table-cell">Aumento de preços unilateral</td>
-                                <td class="table-cell text-green-700 font-semibold">✔️ Custo zero permanente</td>
-                            </tr>
-                            <tr>
-                                <td class="table-cell">Auditoria de compliance (licença proprietária)</td>
-                                <td class="table-cell text-green-700 font-semibold">✔️ Licença open source clara (Apache 2.0)</td>
-                            </tr>
-                            <tr>
-                                <td class="table-cell">Interrupção do serviço (dependência externa)</td>
-                                <td class="table-cell text-green-700 font-semibold">✔️ Controle local total</td>
-                            </tr>
-                            <tr>
-                                <td class="table-cell">Dependência de conectividade</td>
-                                <td class="table-cell text-green-700 font-semibold">✔️ Funciona 100% offline</td>
-                            </tr>
-                        </tbody>
-                    </table>
+                    <div class="card mt-8 w-full max-w-3xl overflow-x-auto">
+                        <table class="w-full min-w-[600px]">
+                            <thead>
+                                <tr class="table-header">
+                                    <th class="table-cell text-left">Risco Atual (Docker Desktop)</th>
+                                    <th class="table-cell text-left">Como o Portainer CE Resolve</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="table-cell">Aumento de preços unilateral</td>
+                                    <td class="table-cell text-green-700 font-semibold">✔️ Custo zero permanente</td>
+                                </tr>
+                                <tr>
+                                    <td class="table-cell">Auditoria de compliance (licença proprietária)</td>
+                                    <td class="table-cell text-green-700 font-semibold">✔️ Licença open source clara (Apache 2.0)</td>
+                                </tr>
+                                <tr>
+                                    <td class="table-cell">Interrupção do serviço (dependência externa)</td>
+                                    <td class="table-cell text-green-700 font-semibold">✔️ Controle local total</td>
+                                </tr>
+                                <tr>
+                                    <td class="table-cell">Dependência de conectividade</td>
+                                    <td class="table-cell text-green-700 font-semibold">✔️ Funciona 100% offline</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </section>
 
             <section data-background-color="#F0FFF0">
                 <h2 class="section-title">Nível 6: O Momento Certo</h2>
                 <p class="text-lg text-slate-700 mb-6">O timing é crucial para maximizar nossos ganhos. Quando devemos agir?</p>
-                <div class="question-container">
-                    <p class="text-2xl font-semibold mb-4">Qual trimestre é ideal para a migração, antes da renovação das licenças em Q4?</p>
-                    <div class="question-options flex flex-wrap justify-center">
-                        <button onclick="checkAnswer(this, 'incorrect', 'Q1')">Q1</button>
-                        <button onclick="checkAnswer(this, 'correct', 'Q2')">Q2</button>
-                        <button onclick="checkAnswer(this, 'incorrect', 'Q3')">Q3</button>
+                <div class="question-and-card-layout">
+                    <div class="question-container">
+                        <p class="text-2xl font-semibold mb-4">Qual trimestre é ideal para a migração, antes da renovação das licenças em Q4?</p>
+                        <div class="question-options flex flex-wrap justify-center">
+                            <button onclick="checkAnswer(this, 'incorrect', 'Q1')">Q1</button>
+                            <button onclick="checkAnswer(this, 'correct', 'Q2')">Q2</button>
+                            <button onclick="checkAnswer(this, 'incorrect', 'Q3')">Q3</button>
+                        </div>
+                        <div id="feedback5" class="feedback-message"></div>
                     </div>
-                    <div id="feedback5" class="feedback-message"></div>
-                </div>
-                <div class="card mt-8 w-full max-w-xl">
-                    <h3 class="text-xl font-semibold text-[#006400] mb-2 text-center">Timing Estratégico</h3>
-                    <div class="mt-4 space-y-2">
-                        <div class="bg-[#32CD32] text-white p-2 rounded-md shadow">Q1: Planejamento</div>
-                        <div class="bg-[#006400] text-white p-3 rounded-md shadow font-semibold scale-110">Q2: Migração para Portainer CE <span class="text-xs">(AGORA!)</span></div>
-                        <div class="bg-[#32CD32] text-white p-2 rounded-md shadow">Q3: Otimização</div>
-                        <div class="bg-green-500 text-white p-2 rounded-md shadow">Q4: Economia Realizada (Sem Renovação)</div>
+                    <div class="card mt-8 w-full max-w-xl">
+                        <h3 class="text-xl font-semibold text-[#006400] mb-2 text-center">Timing Estratégico</h3>
+                        <div class="mt-4 space-y-2">
+                            <div class="bg-[#32CD32] text-white p-2 rounded-md shadow">Q1: Planejamento</div>
+                            <div class="bg-[#006400] text-white p-3 rounded-md shadow font-semibold scale-110">Q2: Migração para Portainer CE <span class="text-xs">(AGORA!)</span></div>
+                            <div class="bg-[#32CD32] text-white p-2 rounded-md shadow">Q3: Otimização</div>
+                            <div class="bg-green-500 text-white p-2 rounded-md shadow">Q4: Economia Realizada (Sem Renovação)</div>
+                        </div>
                     </div>
                 </div>
             </section>
@@ -338,13 +440,13 @@
             <section data-background-color="#F0FFF0">
                 <h2 class="section-title">Nível 7: Desbloqueando o Potencial</h2>
                 <p class="text-lg text-slate-700 mb-6">A economia não é o fim, mas o meio para um futuro mais inovador.</p>
-                <div class="card w-full max-w-3xl flex flex-col md:flex-row items-center justify-center gap-6">
-                    <div class="text-center">
+                <div class="flex-container-fhd">
+                    <div class="card text-center">
                         <h3 class="text-2xl font-semibold text-[#006400] mb-3">Invista em Talentos e Inovação</h3>
                         <p class="text-6xl my-4">👨‍💻👩‍💻</p>
                         <p class="text-xl text-slate-700">O valor economizado pode financiar <strong class="text-[#32CD32]">2 Desenvolvedores Júnior</strong>, acelerando projetos e P&D.</p>
                     </div>
-                    <div class="text-center">
+                    <div class="card text-center">
                         <h3 class="text-2xl font-semibold text-[#006400] mb-3">Autonomia e Agilidade</h3>
                         <p class="text-6xl my-4">💡⚙️</p>
                         <p class="text-xl text-slate-700">Menos dependências externas significam <strong class="text-[#32CD32]">mais controle e capacidade de adaptação</strong> às novas tecnologias e demandas do mercado.</p>
@@ -355,7 +457,7 @@
             <section data-background-color="#F0FFF0">
                 <h2 class="section-title">Nível 8: Provas de Sucesso</h2>
                 <p class="text-lg text-slate-700 mb-6">Não estamos sozinhos nessa jornada. Outras empresas já colheram os frutos.</p>
-                <div class="grid md:grid-cols-1 lg:grid-cols-2 gap-8 w-full max-w-4xl">
+                <div class="grid-container-fhd">
                     <div class="card">
                         <h3 class="text-xl font-semibold text-[#006400] mb-3">Empresa Similar (2.500 funcionários)</h3>
                         <ul class="list-disc list-inside text-slate-700 space-y-1 pl-2">
@@ -536,7 +638,6 @@
         // LLM Integration
         const generateSummaryBtn = document.getElementById('generateSummaryBtn');
         const summaryOutput = document.getElementById('summaryOutput');
-        // Removed generateQuestionsBtn and questionsOutput
 
         async function callGeminiAPI(prompt) {
             let chatHistory = [];
