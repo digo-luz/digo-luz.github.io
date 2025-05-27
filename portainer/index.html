@@ -1,0 +1,618 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Missão Portainer CE: A Apresentação Gamificada</title>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@4.3.0/dist/reset.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@4.3.0/dist/reveal.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@4.3.0/dist/theme/black.css" id="theme">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --r-background-color: #F0FFF0; /* Honeydew - very light green */
+            --r-main-color: #1E293B; /* Dark Slate Blue - for readability */
+            --r-heading-color: #006400; /* DarkGreen */
+            --r-link-color: #32CD32; /* LimeGreen */
+            --r-link-color-hover: #006400; /* DarkGreen */
+            --r-selection-background-color: #ADFF2F; /* GreenYellow */
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+
+        .reveal .slides section {
+            padding: 20px;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .reveal h1, .reveal h2, .reveal h3, .reveal h4, .reveal h5, .reveal h6 {
+            color: var(--r-heading-color);
+        }
+
+        .reveal .controls button {
+            color: var(--r-link-color);
+        }
+
+        .reveal .progress span {
+            background-color: var(--r-link-color);
+        }
+
+        .stat-number {
+            font-size: 3rem;
+            font-weight: 700;
+            color: #32CD32; /* LimeGreen */
+        }
+        .stat-label {
+            font-size: 1.125rem;
+            color: #006400; /* DarkGreen */
+        }
+        .section-title {
+            font-size: 2.25rem;
+            font-weight: 700;
+            color: #006400; /* DarkGreen */
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+        .card {
+            background-color: white;
+            border-radius: 0.5rem;
+            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -1px rgba(0,0,0,0.06);
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            text-align: left; /* Adjust for card content */
+        }
+        .icon-list-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 0.5rem;
+            font-size: 1.125rem;
+            color: #333333;
+        }
+        .icon-list-item span:first-child {
+            margin-right: 0.75rem;
+            color: #32CD32; /* LimeGreen */
+            font-size: 1.5rem;
+        }
+        .table-header {
+            background-color: #90EE90; /* LightGreen */
+            color: #006400; /* DarkGreen */
+            font-weight: 600;
+        }
+        .table-cell {
+            padding: 0.75rem;
+            border: 1px solid #ADFF2F; /* GreenYellow */
+        }
+        .llm-output {
+            background-color: #F0FFF0;
+            border-left: 4px solid #32CD32;
+            padding: 1rem;
+            margin-top: 1rem;
+            border-radius: 0.25rem;
+            font-style: italic;
+            color: #333333;
+            white-space: pre-wrap;
+            text-align: left;
+        }
+        .llm-button, .game-button {
+            background-color: #006400; /* DarkGreen */
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.5rem;
+            font-weight: 600;
+            transition: background-color 0.3s ease;
+            cursor: pointer;
+            margin-top: 1rem;
+            display: inline-block;
+            border: none;
+        }
+        .llm-button:hover, .game-button:hover {
+            background-color: #32CD32; /* LimeGreen */
+        }
+        .llm-button:disabled, .game-button:disabled {
+            background-color: #9CA3AF;
+            cursor: not-allowed;
+        }
+
+        /* Gamification specific styles */
+        .question-container {
+            background-color: white;
+            border-radius: 0.5rem;
+            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -1px rgba(0,0,0,0.06);
+            padding: 2rem;
+            margin-top: 2rem;
+            max-width: 700px;
+            width: 100%;
+            text-align: center;
+        }
+        .question-options button {
+            background-color: #90EE90; /* LightGreen */
+            color: #006400; /* DarkGreen */
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.5rem;
+            font-weight: 600;
+            margin: 0.5rem;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            border: none;
+        }
+        .question-options button:hover {
+            background-color: #ADFF2F; /* GreenYellow */
+        }
+        .feedback-message {
+            margin-top: 1rem;
+            font-size: 1.25rem;
+            font-weight: 600;
+        }
+        .feedback-correct {
+            color: #006400; /* DarkGreen */
+        }
+        .feedback-incorrect {
+            color: #FF0000; /* Red */
+        }
+        .score-display {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background-color: #006400;
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+            font-weight: 600;
+            z-index: 100;
+        }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 600px;
+            height: 300px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 350px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="reveal">
+        <div class="slides">
+
+            <section data-background-color="#32CD32">
+                <h1 class="text-white text-5xl font-bold mb-4">Missão Portainer CE</h1>
+                <p class="text-white text-2xl mb-8">Sua Jornada para Otimizar Custos e Impulsionar a Inovação</p>
+                <div class="bg-white text-[#32CD32] inline-block p-6 rounded-lg shadow-xl">
+                    <div class="stat-number">R$282.000</div>
+                    <div class="text-2xl font-semibold text-[#006400]">Potencial de Economia Anual</div>
+                </div>
+                <button class="game-button mt-12 text-2xl" onclick="Reveal.next()">Iniciar a Missão!</button>
+            </section>
+
+            <section data-background-color="#F0FFF0">
+                <h2 class="section-title">Nível 1: O Desafio do Custo</h2>
+                <p class="text-lg text-slate-700 mb-6">Nosso primeiro obstáculo: o custo atual do Docker Desktop.</p>
+                <div class="question-container">
+                    <p class="text-2xl font-semibold mb-4">Qual é o custo anual atual que estamos pagando pelo Docker Desktop?</p>
+                    <div class="question-options flex flex-wrap justify-center">
+                        <button onclick="checkAnswer(this, 'incorrect', 'R$150.000')">R$150.000</button>
+                        <button onclick="checkAnswer(this, 'correct', 'R$282.000')">R$282.000</button>
+                        <button onclick="checkAnswer(this, 'incorrect', 'R$500.000')">R$500.000</button>
+                    </div>
+                    <div id="feedback1" class="feedback-message"></div>
+                </div>
+            </section>
+
+            <section data-background-color="#F0FFF0">
+                <h2 class="section-title">Nível 2: A Escalada dos Preços</h2>
+                <p class="text-lg text-slate-700 mb-6">O Docker Inc. tem sido agressivo com seus reajustes. Quanto aumentou nos últimos 3 anos?</p>
+                <div class="question-container">
+                    <p class="text-2xl font-semibold mb-4">Em quantos por cento os preços do Docker Desktop aumentaram nos últimos 3 anos?</p>
+                    <div class="question-options flex flex-wrap justify-center">
+                        <button onclick="checkAnswer(this, 'incorrect', '100%')">100%</button>
+                        <button onclick="checkAnswer(this, 'correct', '300%')">300%</button>
+                        <button onclick="checkAnswer(this, 'incorrect', '50%')">50%</button>
+                    </div>
+                    <div id="feedback2" class="feedback-message"></div>
+                </div>
+                <div class="card mt-8 w-full max-w-xl">
+                    <h3 class="text-xl font-semibold text-[#006400] mb-3 text-center">Aumento Agressivo de Preços</h3>
+                    <div class="chart-container h-64 md:h-72">
+                        <canvas id="priceTrendChart"></canvas>
+                    </div>
+                </div>
+            </section>
+
+            <section data-background-color="#F0FFF0">
+                <h2 class="section-title">Nível 3: O Aliado Chega!</h2>
+                <p class="text-lg text-slate-700 mb-6">Conheça o Portainer CE, a solução que irá revolucionar nossa infraestrutura.</p>
+                <div class="card w-full max-w-3xl">
+                    <h3 class="text-2xl font-semibold text-[#006400] mb-4">Portainer CE: A Solução Inteligente</h3>
+                    <ul class="space-y-3">
+                        <li class="icon-list-item"><span>🔑</span>Zero Vendor Lock-in: Open Source (Apache 2.0)</li>
+                        <li class="icon-list-item"><span>⚙️</span>Funcionalidade Equivalente: Interface web intuitiva</li>
+                        <li class="icon-list-item"><span>🚀</span>Melhor Performance: 60% menos consumo de RAM vs Docker Desktop</li>
+                        <li class="icon-list-item"><span>💻</span>Controle Total: Sem dependência externa</li>
+                        <li class="icon-list-item"><span>🔌</span>100% Offline: Funciona sem conectividade</li>
+                    </ul>
+                    <button id="generateSummaryBtn" class="llm-button mt-6">✨ Gerar Resumo de Benefícios (Poder da IA)</button>
+                    <div id="summaryOutput" class="llm-output hidden"></div>
+                </div>
+            </section>
+
+            <section data-background-color="#F0FFF0">
+                <h2 class="section-title">Nível 4: A Batalha da RAM</h2>
+                <p class="text-lg text-slate-700 mb-6">Um dos grandes trunfos do Portainer CE é sua eficiência. Qual a diferença no consumo de RAM?</p>
+                <div class="question-container">
+                    <p class="text-2xl font-semibold mb-4">O Portainer CE consome quantos por cento MENOS RAM que o Docker Desktop?</p>
+                    <div class="question-options flex flex-wrap justify-center">
+                        <button onclick="checkAnswer(this, 'incorrect', '20%')">20%</button>
+                        <button onclick="checkAnswer(this, 'incorrect', '40%')">40%</button>
+                        <button onclick="checkAnswer(this, 'correct', '60%')">60%</button>
+                    </div>
+                    <div id="feedback3" class="feedback-message"></div>
+                </div>
+                <div class="card mt-8 w-full max-w-xl">
+                    <h3 class="text-xl font-semibold text-[#006400] mb-3 text-center">Comparativo de Consumo de RAM</h3>
+                    <div class="chart-container h-56 md:h-64">
+                        <canvas id="ramUsageChart"></canvas>
+                    </div>
+                </div>
+            </section>
+
+            <section data-background-color="#F0FFF0">
+                <h2 class="section-title">Nível 5: Escudo de Riscos</h2>
+                <p class="text-lg text-slate-700 mb-6">O Portainer CE não só economiza, mas também nos protege. Como ele resolve o risco de "Aumento de preços unilateral"?</p>
+                <div class="question-container">
+                    <p class="text-2xl font-semibold mb-4">Como o Portainer CE mitiga o risco de "Aumento de preços unilateral"?</p>
+                    <div class="question-options flex flex-wrap justify-center">
+                        <button onclick="checkAnswer(this, 'incorrect', 'Oferecendo descontos')">Oferecendo descontos</button>
+                        <button onclick="checkAnswer(this, 'correct', 'Custo zero permanente')">Custo zero permanente</button>
+                        <button onclick="checkAnswer(this, 'incorrect', 'Negociando contratos')">Negociando contratos</button>
+                    </div>
+                    <div id="feedback4" class="feedback-message"></div>
+                </div>
+                <div class="card mt-8 w-full max-w-3xl overflow-x-auto">
+                    <table class="w-full min-w-[600px]">
+                        <thead>
+                            <tr class="table-header">
+                                <th class="table-cell text-left">Risco Atual (Docker Desktop)</th>
+                                <th class="table-cell text-left">Como o Portainer CE Resolve</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="table-cell">Aumento de preços unilateral</td>
+                                <td class="table-cell text-green-700 font-semibold">✔️ Custo zero permanente</td>
+                            </tr>
+                            <tr>
+                                <td class="table-cell">Auditoria de compliance (licença proprietária)</td>
+                                <td class="table-cell text-green-700 font-semibold">✔️ Licença open source clara (Apache 2.0)</td>
+                            </tr>
+                            <tr>
+                                <td class="table-cell">Interrupção do serviço (dependência externa)</td>
+                                <td class="table-cell text-green-700 font-semibold">✔️ Controle local total</td>
+                            </tr>
+                            <tr>
+                                <td class="table-cell">Dependência de conectividade</td>
+                                <td class="table-cell text-green-700 font-semibold">✔️ Funciona 100% offline</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <section data-background-color="#F0FFF0">
+                <h2 class="section-title">Nível 6: O Momento Certo</h2>
+                <p class="text-lg text-slate-700 mb-6">O timing é crucial para maximizar nossos ganhos. Quando devemos agir?</p>
+                <div class="question-container">
+                    <p class="text-2xl font-semibold mb-4">Qual trimestre é ideal para a migração, antes da renovação das licenças em Q4?</p>
+                    <div class="question-options flex flex-wrap justify-center">
+                        <button onclick="checkAnswer(this, 'incorrect', 'Q1')">Q1</button>
+                        <button onclick="checkAnswer(this, 'correct', 'Q2')">Q2</button>
+                        <button onclick="checkAnswer(this, 'incorrect', 'Q3')">Q3</button>
+                    </div>
+                    <div id="feedback5" class="feedback-message"></div>
+                </div>
+                <div class="card mt-8 w-full max-w-xl">
+                    <h3 class="text-xl font-semibold text-[#006400] mb-2 text-center">Timing Estratégico</h3>
+                    <div class="mt-4 space-y-2">
+                        <div class="bg-[#32CD32] text-white p-2 rounded-md shadow">Q1: Planejamento</div>
+                        <div class="bg-[#006400] text-white p-3 rounded-md shadow font-semibold scale-110">Q2: Migração para Portainer CE <span class="text-xs">(AGORA!)</span></div>
+                        <div class="bg-[#32CD32] text-white p-2 rounded-md shadow">Q3: Otimização</div>
+                        <div class="bg-green-500 text-white p-2 rounded-md shadow">Q4: Economia Realizada (Sem Renovação)</div>
+                    </div>
+                </div>
+            </section>
+
+            <section data-background-color="#F0FFF0">
+                <h2 class="section-title">Nível 7: Desbloqueando o Potencial</h2>
+                <p class="text-lg text-slate-700 mb-6">A economia não é o fim, mas o meio para um futuro mais inovador.</p>
+                <div class="card w-full max-w-3xl flex flex-col md:flex-row items-center justify-center gap-6">
+                    <div class="text-center">
+                        <h3 class="text-2xl font-semibold text-[#006400] mb-3">Invista em Talentos e Inovação</h3>
+                        <p class="text-6xl my-4">👨‍💻👩‍💻</p>
+                        <p class="text-xl text-slate-700">O valor economizado pode financiar <strong class="text-[#32CD32]">2 Desenvolvedores Júnior</strong>, acelerando projetos e P&D.</p>
+                    </div>
+                    <div class="text-center">
+                        <h3 class="text-2xl font-semibold text-[#006400] mb-3">Autonomia e Agilidade</h3>
+                        <p class="text-6xl my-4">💡⚙️</p>
+                        <p class="text-xl text-slate-700">Menos dependências externas significam <strong class="text-[#32CD32]">mais controle e capacidade de adaptação</strong> às novas tecnologias e demandas do mercado.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section data-background-color="#F0FFF0">
+                <h2 class="section-title">Nível 8: Provas de Sucesso</h2>
+                <p class="text-lg text-slate-700 mb-6">Não estamos sozinhos nessa jornada. Outras empresas já colheram os frutos.</p>
+                <div class="grid md:grid-cols-1 lg:grid-cols-2 gap-8 w-full max-w-4xl">
+                    <div class="card">
+                        <h3 class="text-xl font-semibold text-[#006400] mb-3">Empresa Similar (2.500 funcionários)</h3>
+                        <ul class="list-disc list-inside text-slate-700 space-y-1 pl-2">
+                            <li>Migração de <strong>300 desenvolvedores</strong> em 4 meses.</li>
+                            <li>Resultado: <strong>72% de redução de custos</strong>.</li>
+                            <li><strong>Zero impacto</strong> na produtividade.</li>
+                            <li>Benefício adicional: <strong>Melhor performance</strong> local.</li>
+                        </ul>
+                    </div>
+                    <div class="card">
+                        <h3 class="text-xl font-semibold text-[#006400] mb-3">Startup em Crescimento (50 → 1000 funcionários)</h3>
+                         <ul class="list-disc list-inside text-slate-700 space-y-1 pl-2">
+                            <li>Estratégia: Portainer CE desde o início.</li>
+                            <li>Economia: <strong>US$240.000/ano</strong> vs. concorrentes usando Docker Desktop.</li>
+                            <li>Investimento: Capital reinvestido em <strong>talentos e inovação</strong>.</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <section data-background-color="#006400">
+                <h2 class="text-white text-4xl font-bold mb-6">Missão Cumprida!</h2>
+                <p class="text-white text-lg mb-8 max-w-3xl mx-auto">Esta migração é sobre controle estratégico, otimização de recursos e investimento no futuro da nossa empresa.</p>
+                <div class="text-xl md:text-2xl font-bold bg-white text-[#006400] p-6 rounded-lg inline-block shadow-xl">
+                    <p>Continuamos pagando <strong class="text-red-600">~US$23.500/mês</strong> por uma ferramenta que temos alternativa gratuita e melhor?</p>
+                    <p class="mt-2">Ou preferimos investir esse dinheiro em <strong class="text-green-600">crescimento e inovação</strong>?</p>
+                </div>
+                <div class="text-white text-2xl font-bold mt-8">Sua Pontuação Final: <span id="finalScore">0</span></div>
+            </section>
+
+        </div>
+    </div>
+
+    <div id="scoreDisplay" class="score-display">Pontuação: 0</div>
+
+    <script src="https://cdn.jsdelivr.net/npm/reveal.js@4.3.0/dist/reveal.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/reveal.js@4.3.0/plugin/notes/notes.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/reveal.js@4.3.0/plugin/markdown/markdown.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/reveal.js@4.3.0/plugin/highlight/highlight.js"></script>
+    <script>
+        let score = 0;
+        const scoreDisplay = document.getElementById('scoreDisplay');
+        const finalScoreDisplay = document.getElementById('finalScore');
+
+        function updateScore(points) {
+            score += points;
+            scoreDisplay.textContent = `Pontuação: ${score}`;
+            finalScoreDisplay.textContent = score;
+        }
+
+        function checkAnswer(button, type, expectedAnswer) {
+            const parentContainer = button.closest('.question-container');
+            const feedbackDiv = parentContainer.querySelector('.feedback-message');
+            const buttons = parentContainer.querySelectorAll('.question-options button');
+
+            buttons.forEach(btn => btn.disabled = true); // Disable all buttons after selection
+
+            if (type === 'correct') {
+                feedbackDiv.textContent = 'Correto! 🎉';
+                feedbackDiv.className = 'feedback-message feedback-correct';
+                updateScore(10); // Add points for correct answer
+                setTimeout(() => Reveal.next(), 1500); // Auto-advance after a short delay
+            } else {
+                feedbackDiv.textContent = `Incorreto. A resposta correta era: ${expectedAnswer}`;
+                feedbackDiv.className = 'feedback-message feedback-incorrect';
+                // No points for incorrect, or deduct if desired
+                setTimeout(() => Reveal.next(), 2500); // Auto-advance after a short delay
+            }
+        }
+
+        function wrapLabels(label, maxWidth) {
+            if (typeof label !== 'string' || label.length <= maxWidth) {
+                return label;
+            }
+            const words = label.split(' ');
+            const lines = [];
+            let currentLine = '';
+            for (const word of words) {
+                if ((currentLine + word).length > maxWidth && currentLine.length > 0) {
+                    lines.push(currentLine.trim());
+                    currentLine = '';
+                }
+                currentLine += word + ' ';
+            }
+            if (currentLine.trim().length > 0) {
+                lines.push(currentLine.trim());
+            }
+            return lines.length > 0 ? lines : [label];
+        }
+
+        const defaultTooltipCallback = {
+            plugins: {
+                tooltip: {
+                    callbacks: {
+                        title: function(tooltipItems) {
+                            const item = tooltipItems[0];
+                            let label = item.chart.data.labels[item.dataIndex];
+                            if (Array.isArray(label)) {
+                              return label.join(' ');
+                            } else {
+                              return label;
+                            }
+                        }
+                    }
+                },
+                legend: {
+                    position: 'bottom',
+                     labels: {
+                        color: '#006400',
+                        font: {
+                            size: 12
+                        }
+                    }
+                }
+            },
+            responsive: true,
+            maintainAspectRatio: false,
+        };
+
+        let priceTrendChartInstance = null;
+        let ramUsageChartInstance = null;
+
+        function renderCharts() {
+            if (priceTrendChartInstance) priceTrendChartInstance.destroy();
+            if (ramUsageChartInstance) ramUsageChartInstance.destroy();
+
+            const priceTrendCtx = document.getElementById('priceTrendChart');
+            if (priceTrendCtx) {
+                priceTrendChartInstance = new Chart(priceTrendCtx.getContext('2d'), {
+                    type: 'line',
+                    data: {
+                        labels: ['Ano -3', 'Ano -2', 'Ano -1', 'Atual'],
+                        datasets: [{
+                            label: 'Índice de Preço Docker Desktop',
+                            data: [100, 150, 250, 400],
+                            borderColor: '#FF6384',
+                            backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                            fill: true,
+                            tension: 0.1
+                        }]
+                    },
+                    options: {
+                        ...defaultTooltipCallback,
+                        scales: {
+                            y: { beginAtZero: true, title: { display: true, text: 'Índice de Preço Relativo', color: '#006400' }, ticks: { color: '#006400' } },
+                            x: { title: { display: true, text: 'Tempo', color: '#006400' }, ticks: { color: '#006400' } }
+                        }
+                    }
+                });
+            }
+
+            const ramUsageCtx = document.getElementById('ramUsageChart');
+            if (ramUsageCtx) {
+                ramUsageChartInstance = new Chart(ramUsageCtx.getContext('2d'), {
+                    type: 'bar',
+                    data: {
+                        labels: [wrapLabels('Docker Desktop',16), wrapLabels('Portainer CE',16)],
+                        datasets: [{
+                            label: 'Consumo de RAM Relativo',
+                            data: [100, 40],
+                            backgroundColor: ['#FF8C00', '#006400'],
+                            borderColor: ['#FFFFFF', '#FFFFFF'],
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {
+                        ...defaultTooltipCallback,
+                        indexAxis: 'y',
+                        scales: {
+                            x: { beginAtZero: true, title: { display: true, text: 'Consumo Relativo (%)', color: '#006400' }, ticks: { color: '#006400' } },
+                            y: { ticks: { color: '#006400', autoSkip: false } }
+                        }
+                    }
+                });
+            }
+        }
+
+        // LLM Integration
+        const generateSummaryBtn = document.getElementById('generateSummaryBtn');
+        const summaryOutput = document.getElementById('summaryOutput');
+        // Removed generateQuestionsBtn and questionsOutput
+
+        async function callGeminiAPI(prompt) {
+            let chatHistory = [];
+            chatHistory.push({ role: "user", parts: [{ text: prompt }] });
+            const payload = { contents: chatHistory };
+            const apiKey = "";
+            const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`;
+
+            try {
+                const response = await fetch(apiUrl, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+                const result = await response.json();
+                if (result.candidates && result.candidates.length > 0 &&
+                    result.candidates[0].content && result.candidates[0].content.parts &&
+                    result.candidates[0].content.parts.length > 0) {
+                    return result.candidates[0].content.parts[0].text;
+                } else {
+                    console.error('Unexpected API response structure:', result);
+                    return 'Erro ao gerar conteúdo. Tente novamente.';
+                }
+            } catch (error) {
+                console.error('Error calling Gemini API:', error);
+                return 'Erro de conexão com a API. Verifique sua rede.';
+            }
+        }
+
+        if (generateSummaryBtn) {
+            generateSummaryBtn.addEventListener('click', async () => {
+                generateSummaryBtn.disabled = true;
+                summaryOutput.classList.remove('hidden');
+                summaryOutput.innerHTML = 'Carregando resumo...';
+
+                const benefitsText = `
+                    Principais Vantagens do Portainer CE:
+                    - Zero Vendor Lock-in: Open Source com licença Apache 2.0
+                    - Funcionalidade Equivalente: Interface web intuitiva, mesmo workflow
+                    - Melhor Performance: 60% menos consumo de RAM vs Docker Desktop
+                    - Controle Total: Sem dependência de conectividade ou serviços externos
+                    - 100% Offline: Funciona sem conectividade
+                    - Custo de Licença: R$0
+                    - ROI no Primeiro Ano: 100%
+                `;
+                const prompt = `Com base nas seguintes vantagens do Portainer CE, gere um resumo conciso e persuasivo em português, destacando os principais benefícios para uma liderança de TI. O resumo deve ter no máximo 3 frases.
+
+                ${benefitsText}`;
+
+                const summary = await callGeminiAPI(prompt);
+                summaryOutput.innerHTML = summary;
+                generateSummaryBtn.disabled = false;
+            });
+        }
+
+        Reveal.initialize({
+            controls: true,
+            progress: true,
+            history: true,
+            center: true,
+            hash: true,
+            transition: 'slide', // none/fade/slide/convex/zoom
+            plugins: [ RevealMarkdown, RevealHighlight ]
+        });
+
+        // Render charts when Reveal.js is ready and on slide changes
+        Reveal.on('ready', event => {
+            renderCharts();
+        });
+
+        Reveal.on('slidechanged', event => {
+            renderCharts(); // Re-render charts on slide change
+            // Reset feedback messages and button states for quiz slides
+            document.querySelectorAll('.feedback-message').forEach(el => el.textContent = '');
+            document.querySelectorAll('.question-options button').forEach(btn => btn.disabled = false);
+        });
+    </script>
+</body>
+</html>
